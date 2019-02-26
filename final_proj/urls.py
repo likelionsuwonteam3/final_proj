@@ -5,5 +5,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
     path('detail/', views.detail, name='detail'),
-    path('blog/<int:blog_id>/',views.more, name='more')
+    path('blog/<int:blog_id>/',views.more, name='more'),
+    path('blog/new/', views.new, name='new'),
+    path('blog/create/', views.create, name='create'),
+
 ]
