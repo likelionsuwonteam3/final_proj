@@ -1,53 +1,27 @@
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
-    integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-    crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-    integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-    crossorigin="anonymous"></script>
+{%extends 'base.html'%}
+{% block contents%}
 
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="{% url 'home' %}">Like Lion</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav ml-auto">
-                    <a class="nav-item nav-link active" href="{% url 'home' %}">Home</span></a>
-                    <a class="nav-item nav-link" href="{% url 'new' %}">게시글 작성</a>
-                    <a class="nav-item nav-link" href="#">수료증</a>
-                </div>
+<div class="container">
+    <div class="card-deck">
+
+        {% for blog in blogs.all %}
+        <div class="card">
+            <div class="card-body">
+                <a href="{% url 'more' blog.id %}">
+                    <h4>{{ blog.title }}</h4>
+                </a>
+                <p class="card-text">{{ blog.pub_date.year }}.{{ blog.pub_date.month }}.{{ blog.pub_date.day }}
+                </p>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">{{ blog.summary }}<a href="{% url 'more' blog.id %}">....more</a></small>
             </div>
         </div>
-    </nav>
-    <br>
-    <br>
-    <div class="container">
-        <div class="card-deck">
+        {% endfor %}
 
-            {% for blog in blogs.all %}
-            <div class="card">
-                <div class="card-body">
-                    <a href="{% url 'more' blog.id %}">
-                        <h4>{{ blog.title }}</h4>
-                    </a>
-                    <p class="card-text">{{ blog.pub_date }}</p>
-                </div>
-                <div class="card-footer">
-                    <small class="text-muted">{{ blog.summary }}<a href="{% url 'more' blog.id %}">....more</a></small>
-                </div>
-            </div>
-            {% endfor %}
-
-        </div>
     </div>
-    <!-- 
+</div>
+{% endblock %}
+<!-- 
 for문에서 blog는 인자가 어떤걸 받아서 for blog라고 썻는지 모르는데 이거만 인강으로 살펴보자 다른
 모델링 부분은 다 이해함! -->
